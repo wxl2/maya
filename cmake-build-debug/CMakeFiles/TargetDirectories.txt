@@ -1,0 +1,10 @@
+/home/wxl/date/code/maya/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/wxl/date/code/maya/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/wxl/date/code/maya/cmake-build-debug/CMakeFiles/maya.dir
+/home/wxl/date/code/maya/cmake-build-debug/base/CMakeFiles/rebuild_cache.dir
+/home/wxl/date/code/maya/cmake-build-debug/base/CMakeFiles/edit_cache.dir
+/home/wxl/date/code/maya/cmake-build-debug/base/CMakeFiles/base.dir
+/home/wxl/date/code/maya/cmake-build-debug/test/CMakeFiles/rebuild_cache.dir
+/home/wxl/date/code/maya/cmake-build-debug/test/CMakeFiles/edit_cache.dir
+/home/wxl/date/code/maya/cmake-build-debug/test/CMakeFiles/AppendFIle_test.dir
+/home/wxl/date/code/maya/cmake-build-debug/test/CMakeFiles/LogStream_test.dir

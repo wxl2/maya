@@ -1,0 +1,5 @@
+add_executable(LogStream_test LogStream_test.cpp)
+target_link_libraries(LogStream_test base)
+
+add_executable(AppendFIle_test AppendFIle_test.cpp)
+target_link_libraries(AppendFIle_test base)

@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="maya"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\base\;CMake Files\test\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/wxl/date/code/maya/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/wxl/date/code/maya/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/wxl/date/code/maya/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/wxl/date/code/maya/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/wxl/date/code/maya/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/wxl/date/code/maya/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/wxl/date/code/maya/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/wxl/date/code/maya/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/wxl/date/code/maya/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/wxl/date/code/maya/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/wxl/date/code/maya/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/wxl/date/code/maya/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/wxl/date/code/maya/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/wxl/date/code/maya/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/wxl/date/code/maya/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="maya">
+				<Option output="/home/wxl/date/code/maya/cmake-build-debug/maya" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/wxl/date/code/maya/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/wxl/date/code/maya/."/>
+					<Add directory="/home/wxl/date/code/maya/./base"/>
+					<Add directory="/home/wxl/date/code/maya/./test"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/wxl/date/code/maya/cmake-build-debug/Makefile&quot;  VERBOSE=1 maya"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/wxl/date/code/maya/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/wxl/date/code/maya/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/wxl/date/code/maya/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="maya/fast">
+				<Option output="/home/wxl/date/code/maya/cmake-build-debug/maya" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/wxl/date/code/maya/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/wxl/date/code/maya/."/>
+					<Add directory="/home/wxl/date/code/maya/./base"/>
+					<Add directory="/home/wxl/date/code/maya/./test"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/wxl/date/code/maya/cmake-build-debug/Makefile&quot;  VERBOSE=1 maya/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/wxl/date/code/maya/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/wxl/date/code/maya/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/wxl/date/code/maya/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="base">
+				<Option output="/home/wxl/date/code/maya/cmake-build-debug/base/libbase.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/wxl/date/code/maya/cmake-build-debug/base"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/wxl/date/code/maya/."/>
+					<Add directory="/home/wxl/date/code/maya/./base"/>
+					<Add directory="/home/wxl/date/code/maya/./test"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/wxl/date/code/maya/cmake-build-debug/base/Makefile&quot;  VERBOSE=1 base"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/wxl/date/code/maya/cmake-build-debug/base/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/wxl/date/code/maya/cmake-build-debug/base/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/wxl/date/code/maya/cmake-build-debug/base/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="base/fast">
+				<Option output="/home/wxl/date/code/maya/cmake-build-debug/base/libbase.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/wxl/date/code/maya/cmake-build-debug/base"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/wxl/date/code/maya/."/>
+					<Add directory="/home/wxl/date/code/maya/./base"/>
+					<Add directory="/home/wxl/date/code/maya/./test"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/wxl/date/code/maya/cmake-build-debug/base/Makefile&quot;  VERBOSE=1 base/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/wxl/date/code/maya/cmake-build-debug/base/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/wxl/date/code/maya/cmake-build-debug/base/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/wxl/date/code/maya/cmake-build-debug/base/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="AppendFIle_test">
+				<Option output="/home/wxl/date/code/maya/cmake-build-debug/test/AppendFIle_test" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/wxl/date/code/maya/cmake-build-debug/test"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/wxl/date/code/maya/."/>
+					<Add directory="/home/wxl/date/code/maya/./base"/>
+					<Add directory="/home/wxl/date/code/maya/./test"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/wxl/date/code/maya/cmake-build-debug/test/Makefile&quot;  VERBOSE=1 AppendFIle_test"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/wxl/date/code/maya/cmake-build-debug/test/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/wxl/date/code/maya/cmake-build-debug/test/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/wxl/date/code/maya/cmake-build-debug/test/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="AppendFIle_test/fast">
+				<Option output="/home/wxl/date/code/maya/cmake-build-debug/test/AppendFIle_test" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/wxl/date/code/maya/cmake-build-debug/test"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/wxl/date/code/maya/."/>
+					<Add directory="/home/wxl/date/code/maya/./base"/>
+					<Add directory="/home/wxl/date/code/maya/./test"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/wxl/date/code/maya/cmake-build-debug/test/Makefile&quot;  VERBOSE=1 AppendFIle_test/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/wxl/date/code/maya/cmake-build-debug/test/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/wxl/date/code/maya/cmake-build-debug/test/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/wxl/date/code/maya/cmake-build-debug/test/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="LogStream_test">
+				<Option output="/home/wxl/date/code/maya/cmake-build-debug/test/LogStream_test" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/wxl/date/code/maya/cmake-build-debug/test"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/wxl/date/code/maya/."/>
+					<Add directory="/home/wxl/date/code/maya/./base"/>
+					<Add directory="/home/wxl/date/code/maya/./test"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/wxl/date/code/maya/cmake-build-debug/test/Makefile&quot;  VERBOSE=1 LogStream_test"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/wxl/date/code/maya/cmake-build-debug/test/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/wxl/date/code/maya/cmake-build-debug/test/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/wxl/date/code/maya/cmake-build-debug/test/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="LogStream_test/fast">
+				<Option output="/home/wxl/date/code/maya/cmake-build-debug/test/LogStream_test" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/wxl/date/code/maya/cmake-build-debug/test"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/wxl/date/code/maya/."/>
+					<Add directory="/home/wxl/date/code/maya/./base"/>
+					<Add directory="/home/wxl/date/code/maya/./test"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/wxl/date/code/maya/cmake-build-debug/test/Makefile&quot;  VERBOSE=1 LogStream_test/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/wxl/date/code/maya/cmake-build-debug/test/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/wxl/date/code/maya/cmake-build-debug/test/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/wxl/date/code/maya/cmake-build-debug/test/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/wxl/date/code/maya/base/FileUtil.cpp">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/home/wxl/date/code/maya/base/FileUtil.h">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/home/wxl/date/code/maya/base/LogStream.cpp">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/home/wxl/date/code/maya/base/LogStream.h">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/home/wxl/date/code/maya/base/Timestamp.cpp">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/home/wxl/date/code/maya/base/Timestamp.h">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/home/wxl/date/code/maya/main.cpp">
+			<Option target="maya"/>
+		</Unit>
+		<Unit filename="/home/wxl/date/code/maya/test/AppendFIle_test.cpp">
+			<Option target="AppendFIle_test"/>
+		</Unit>
+		<Unit filename="/home/wxl/date/code/maya/test/LogStream_test.cpp">
+			<Option target="LogStream_test"/>
+		</Unit>
+		<Unit filename="/home/wxl/date/code/maya/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/wxl/date/code/maya/base/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\base\"/>
+		</Unit>
+		<Unit filename="/home/wxl/date/code/maya/test/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\test\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
