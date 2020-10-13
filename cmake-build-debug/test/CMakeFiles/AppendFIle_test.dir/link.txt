@@ -1,1 +1,0 @@
-/usr/bin/c++  -g   CMakeFiles/AppendFIle_test.dir/AppendFIle_test.cpp.o  -o AppendFIle_test  ../base/libbase.a -lpthread 

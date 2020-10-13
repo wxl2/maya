@@ -1,1 +1,0 @@
-/usr/bin/c++  -g   CMakeFiles/maya.dir/main.cpp.o  -o maya  base/libbase.a -lpthread 
