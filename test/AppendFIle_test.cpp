@@ -5,19 +5,15 @@
 #include "../base/FileUtil.h"
 #include <thread>
 
-void func(){
-        maya::FileUtil::AppendFile file1("file1");
-};
 
-void func2(){
-    maya::FileUtil::AppendFile file1("file");
-};
 int main()
 {
-    std::thread th1(func);
-    std::thread th2(func2);
-    th1.join();
-    th2.join();
+    std::string line = "1234567890 abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ ";
+    maya::FileUtil::AppendFile file("file");
+    for(int i=0;i<1025;i++)
+    {
+        file.append(line.c_str(),line.length());
+    }
     return 0;
 }
 

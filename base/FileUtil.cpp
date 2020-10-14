@@ -7,7 +7,7 @@
 using namespace maya::FileUtil;
 
 AppendFile::AppendFile(std::string filename):
-fp_(::fopen(filename.c_str(),/*"ae"*/"r")),// 'e' for O_CLOEXEC
+fp_(::fopen(filename.c_str(),"ae")),// 'e' for O_CLOEXEC
 writtenBytes_(0)
 {
     assert(fp_);

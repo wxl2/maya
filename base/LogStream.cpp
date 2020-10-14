@@ -26,7 +26,8 @@ namespace detail{
         T i =value;
         char *p=buf;
         do {
-            int lsd=static_cast<int>(value%10);
+            int lsd=static_cast<int>(i%10);
+            i/=10;
             *p++=zero[lsd];
         }while(i!=0);
         if(value<0)
