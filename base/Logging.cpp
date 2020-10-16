@@ -6,13 +6,24 @@
 #include <sys/syscall.h>
 #include <unistd.h>
 
-//#include <iostream>//for debeg
+//#include <iostream>//for debug
 
 namespace maya{
     __thread char t_errnobuf[512];
     __thread char t_time[64];
     __thread time_t t_lastSecond;
+    __thread int t_cachedTid=0;
+    __thread char t_tidString[32];
+    __thread int t_tidStringLength=6;
 
+    void cacheTid()
+    {
+        if (t_cachedTid == 0)
+        {
+            t_cachedTid = ::syscall(SYS_gettid);
+            t_tidStringLength = snprintf(t_tidString, sizeof t_tidString, "%5d ", t_cachedTid);
+        }
+    }
     const char* strerror_tl(int savedErrno)
     {
         return strerror_r(savedErrno, t_errnobuf, sizeof t_errnobuf);
@@ -70,7 +81,6 @@ namespace maya{
     void defaultOutput(const char* msg, int len)
     {
         size_t n = fwrite(msg, 1, len, stdout);
-        //FIXME check n
         (void)n;
     }
 
@@ -140,10 +150,11 @@ namespace maya{
               basename_(file)
     {
         formatTime();
-        std::ostringstream osThreadID;
-        osThreadID << ::syscall(SYS_gettid)<<' ';
-        //std::cout<<osThreadID.str()<<std::endl; //for debug
-        stream_ << string(osThreadID.str());
+        if (__builtin_expect(t_cachedTid == 0, 0))
+        {
+            cacheTid();
+        }
+        stream_ << T(t_tidString, t_tidStringLength);
         stream_ << T(LogLevelName[level], 6);
         if (savedErrno != 0)
         {
@@ -161,8 +172,7 @@ namespace maya{
             t_lastSecond = seconds;
             struct tm tm_time;
 
-
-                ::gmtime_r(&seconds, &tm_time);
+            ::gmtime_r(&seconds, &tm_time);
 
             int len = snprintf(t_time, sizeof(t_time), "%4d%02d%02d %02d:%02d:%02d",
                                tm_time.tm_year + 1900, tm_time.tm_mon + 1, tm_time.tm_mday,

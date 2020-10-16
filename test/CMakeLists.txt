@@ -9,3 +9,6 @@ target_link_libraries(LogFile_test base)
 
 add_executable(Logging_test Logging_test.cpp)
 target_link_libraries(Logging_test base)
+
+add_executable(AsyncLogging_test AsyncLogging_test.cpp)
+target_link_libraries(AsyncLogging_test base)

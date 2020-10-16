@@ -1,2 +1,5 @@
 #2020-10-12
 项目开始，创建git仓库
+
+#2020-10-16
+根据日志模块需求，从muduo库中选择添加目前所需的工具类:AppendFile,LogFiel,LogStream,Logging,Timestamp;使用标准库改写CountDownLatch,并根据这些完成异步日志AsyncLogging类.

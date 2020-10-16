@@ -44,7 +44,7 @@ void AppendFile::append(const char *logline, size_t len)
 
 void AppendFile::flush()
 {
-    ::fflush(fp_);
+    int ret=::fflush(fp_);
 }
 
 size_t AppendFile::write(const char *logline, size_t len)
