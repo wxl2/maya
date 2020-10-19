@@ -6,7 +6,9 @@ set(base_SRCS
         Logging.cpp
         CountDownLatch.cpp
         AsyncLogging.cpp
-        LogStream.cpp)
+        LogStream.cpp
+        ThreadPool.cpp)
+
 
 add_library(base ${base_SRCS})
 target_link_libraries(base pthread)

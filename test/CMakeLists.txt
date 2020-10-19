@@ -12,3 +12,9 @@ target_link_libraries(Logging_test base)
 
 add_executable(AsyncLogging_test AsyncLogging_test.cpp)
 target_link_libraries(AsyncLogging_test base)
+
+add_executable(CircularList_test CircularList_test.cpp)
+target_link_libraries(CircularList_test base)
+
+add_executable(ThreadPool_test ThreadPool_test.cpp)
+target_link_libraries(ThreadPool_test base)

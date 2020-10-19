@@ -2,4 +2,7 @@
 项目开始，创建git仓库
 
 #2020-10-16
-根据日志模块需求，从muduo库中选择添加目前所需的工具类:AppendFile,LogFiel,LogStream,Logging,Timestamp;使用标准库改写CountDownLatch,并根据这些完成异步日志AsyncLogging类.
+根据日志模块需求,从muduo库中选择添加目前所需的工具类:AppendFile,LogFiel,LogStream,Logging,Timestamp并移除StringPiece类,同时修改使用StringPiece的类(LogFile,AppendFile);使用标准库改写CountDownLatch,并根据这些和标准库完成异步日志AsyncLogging类.去除时区类的使用,统一使用UTC时间.
+
+#2020-10-19
+完成队列的修改设计,线程池的设计,剥离Boost库circular_buffer,使用自写CircularLits,使用std::thread,std::mutex,std::condition_variable完成线程池设计.
