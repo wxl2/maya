@@ -60,7 +60,7 @@ namespace maya{
     {
         time_t now = 0;
         string filename = getLogFileName(basename_, &now);
-        time_t start = now / kRollPerSeconds_ * kRollPerSeconds_;
+        time_t start = now / kRollPerSeconds_ * kRollPerSeconds_;//除了之后再乘，正好消掉大于一天小于两天的部分
 
         if (now > lastRoll_)
         {

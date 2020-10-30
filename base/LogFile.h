@@ -46,9 +46,9 @@ namespace FileUtil{
         int count_;
 
         std::unique_ptr<std::mutex> mutex_;
-        time_t startOfPeriod_;
-        time_t lastRoll_;
-        time_t lastFlush_;
+        time_t startOfPeriod_;//文件创建时间，都为每天的0时0分
+        time_t lastRoll_;//上次文件滚动时间
+        time_t lastFlush_;//上次刷新时间
         std::unique_ptr<FileUtil::AppendFile> file_;
 
         const static int kRollPerSeconds_ = 60*60*24;

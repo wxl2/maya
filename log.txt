@@ -6,3 +6,6 @@
 
 #2020-10-19
 完成队列的修改设计,线程池的设计,剥离Boost库circular_buffer,使用自写CircularLits,使用std::thread,std::mutex,std::condition_variable完成线程池设计.
+
+#2020-10-30
+完成EventLoop,Channel,Poller,TimerQueue,Timer,TimerId的基本框架编写,sock操作的封装
