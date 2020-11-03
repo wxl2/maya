@@ -39,7 +39,7 @@ namespace net {
         void runInLoop(Functor cb);
 
         void queueInLoop(Functor cb);
-        void wakeup();
+        void wakeup();//唤醒IO线程来执行任务
         void updateChannel(Channel* channel);
 
         void assertInLoopThread() {
@@ -62,7 +62,7 @@ namespace net {
         bool looping_;//bool变量是原子操作
         bool quit_;//atomic
         bool callingPendingFunctors_;
-        int wakeupFd_;
+        int wakeupFd_;//用于唤醒IO线程
         std::unique_ptr<Channel> wakeupChannel_;
         std::mutex mutex_;
         std::vector<Functor> pendingFunctors_;
