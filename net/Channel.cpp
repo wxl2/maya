@@ -26,11 +26,17 @@ void Channel::update()
     loop_->updateChannel(this);
 }
 
-void Channel::handleEvent()
+void Channel::handleEvent(Timestamp receiveTime)
 {
+    eventHandling_= true;
     if(revents_&POLLNVAL)
     {
         LOG_WARN<<"Channel::handleEvent() POLLNVAL";
+    }
+    if((revents_&POLLHUP)&&!(revents_&POLLIN))
+    {
+        LOG_WARN<<"Channel::handleEvent() POLLHUP";
+        if(closeCallback_) closeCallback_();
     }
     if(revents_&(POLLERR|POLLNVAL))
     {
@@ -38,9 +44,15 @@ void Channel::handleEvent()
     }
     if(revents_&(POLLIN|POLLPRI|POLLHUP))
     {
-        if(readCallback_) readCallback_();
+        //FIXME if(readCallback_) readCallback_();
     }
     if(revents_&POLLOUT)
         if(writeCallback_) writeCallback_();
+    eventHandling_= false;
+}
+
+Channel::~Channel()
+{
+    assert(!eventHandling_);
 }
 

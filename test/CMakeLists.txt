@@ -21,3 +21,6 @@ target_link_libraries(ThreadPool_test base)
 
 add_executable(EventLoop_test EventLoop_test.cpp)
 target_link_libraries(EventLoop_test base net)
+
+add_executable(Acceptor_test Acceptor_test.cpp)
+target_link_libraries(Acceptor_test  base net)

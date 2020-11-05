@@ -6,6 +6,7 @@
 #define MAYA_CHANNEL_H
 
 #include "../base/nocopyable.h"
+#include "../base/Timestamp.h"
 #include <functional>
 #include <memory>
 
@@ -17,12 +18,14 @@ namespace net{
     {
     public:
         typedef std::function<void()> EventCallback;
+        typedef std::function<void(Timestamp)> ReadEventCallback;
 
         Channel(EventLoop *loop,int fd);
 
-        void handleEvent();
+        ~Channel();
+        void handleEvent(Timestamp receiveTime);
 
-        void setReadCallback(const EventCallback& cb)
+        void setReadCallback(const ReadEventCallback& cb)
         {readCallback_=cb;}
         void setWriteCallback(const EventCallback& cb)
         {writeCallback_=cb;}
@@ -36,6 +39,10 @@ namespace net{
 
         //监听读事件，在events_中添加读事件，调用update将其添加到监听队列
         void enableReading(){events_|=kReadEvent;update();}
+        void enableWriting(){events_|kWriteEvent;update();}
+        void disableWriting(){events_&~kWriteEvent;update();}
+        void disableAll(){events_=kNoneEvent;update();}
+        bool isWriting() const{return events_&kWriteEvent;}
 
 
         int index(){return index_;}
@@ -56,9 +63,12 @@ namespace net{
         int revents_;
         int index_;
 
-        EventCallback readCallback_;
+        bool eventHandling_;
+
+        ReadEventCallback readCallback_;
         EventCallback writeCallback_;
         EventCallback errorCallback_;
+        EventCallback closeCallback_;
     };
 }//namespace net
 }//namespace maya

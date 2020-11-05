@@ -41,6 +41,7 @@ namespace net {
         void queueInLoop(Functor cb);
         void wakeup();//唤醒IO线程来执行任务
         void updateChannel(Channel* channel);
+        void removeChannel(Channel* channel);
 
         void assertInLoopThread() {
             if (!isInLoopThread()) {
@@ -61,6 +62,7 @@ namespace net {
 
         bool looping_;//bool变量是原子操作
         bool quit_;//atomic
+        bool eventHandling_;//用于事件处理
         bool callingPendingFunctors_;
         int wakeupFd_;//用于唤醒IO线程
         std::unique_ptr<Channel> wakeupChannel_;
@@ -68,7 +70,10 @@ namespace net {
         std::vector<Functor> pendingFunctors_;
         std::unique_ptr<Poller> poller_;
         std::unique_ptr<TimerQueue> timerQueue_;
+
         ChannelList activeChanels_;
+        Channel* currentActiveChannel_;
+
         const std::pair<std::thread::id,pid_t> threadId_;
     };
 }//namespace net

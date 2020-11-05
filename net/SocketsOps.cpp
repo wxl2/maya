@@ -45,12 +45,12 @@ int sockets::createNonbolckingOrDie()
 
 int sockets::connect(int sockfd,const struct sockaddr_in* addr)
 {
-    return ::connect(sockfd,sockaddr_cast(addr),static_cast<socklen_t>(sizeof(addr)));
+    return ::connect(sockfd,sockaddr_cast(addr),static_cast<socklen_t>(sizeof(*addr)));
 }
 
 void sockets::bindOrDie(int sockfd, const struct sockaddr_in* addr)
 {
-    int ret=::bind(sockfd,sockaddr_cast(addr),static_cast<socklen_t>(sizeof(addr)));
+    int ret=::bind(sockfd,sockaddr_cast(addr),static_cast<socklen_t>(sizeof(*addr)));
     if(ret<0)
     {
         LOG_SYSFATAL<<"sockets::bindOrDie";
@@ -70,7 +70,7 @@ void sockets::listenOrDie(int sockfd)
 
 int  sockets::accept(int sockfd, struct sockaddr_in* addr)
 {
-    socklen_t addrlen=static_cast<socklen_t>(sizeof(addr));
+    socklen_t addrlen=static_cast<socklen_t>(sizeof(*addr));
 
     int connfd=::accept4(sockfd,sockaddr_cast(addr),&addrlen,SOCK_NONBLOCK|SOCK_CLOEXEC);
     if(connfd<0)
@@ -147,7 +147,7 @@ void sockets::toIpPort(char *buf, size_t size, const struct sockaddr_in *addr)
 
 void sockets::toIp(char *buf,size_t size,const struct sockaddr_in* addr)
 {
-    assert(size>=sizeof(sockaddr_in));
+    assert(size>=sizeof(struct sockaddr_in));
     ::inet_ntop(AF_INET,&addr->sin_addr,buf,static_cast<socklen_t>(size));
 }
 

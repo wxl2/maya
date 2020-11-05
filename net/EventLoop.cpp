@@ -60,7 +60,7 @@ void EventLoop::loop()
         poller_->poll(kPollTimeMs,&activeChanels_);
         for(ChannelList::iterator it=activeChanels_.begin();it!=activeChanels_.end();++it)
         {
-            (*it)->handleEvent();
+           //FIXME (*it)->handleEvent();
         }
         doPendingFunctors();
     }
@@ -164,4 +164,16 @@ void EventLoop::wakeup()
     {
         LOG_ERROR << "EventLoop::wakeup() writes " << n << " bytes instead of 8";
     }
+}
+
+void EventLoop::removeChannel(Channel* channel)
+{
+    assert(channel->ownerloop());
+    assertInLoopThread();
+    if(eventHandling_)
+    {
+        assert(currentActiveChannel_==channel||
+        std::find(activeChanels_.begin(),activeChanels_.end(),channel)==activeChanels_.end());
+    }
+    poller_->removeChannel(channel);
 }
