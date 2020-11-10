@@ -10,6 +10,9 @@
 #include <sys/poll.h>
 #include <sys/syscall.h>
 #include <unistd.h>
+#include <signal.h>
+#include <sys/eventfd.h>
+#include <unistd.h>
 
 using namespace maya;
 using namespace maya::net;
@@ -24,12 +27,21 @@ EventLoop* EventLoop::getEventLoopOfCurrentThread()
 }
 EventLoop::EventLoop()
 :looping_(false),
-threadId_(std::this_thread::get_id(),::syscall(SYS_gettid))
+threadId_(std::this_thread::get_id(),::syscall(SYS_gettid)),
+quit_(false),
+eventHandling_(false),
+iteration_(0),
+poller_(Poller::newDefaultPoller(this)),
+timerQueue_(new TimerQueue(this)),
+wakeupFd_(EventLoop::createWakeupfd()),
+wakeupChannel_(new Channel(this,wakeupFd_)),
+currentActiveChannel_(NULL)
 {
     std::stringstream ss;
     ss<<"EventLoop created "<<this<<" in thread "<<threadId_.second;
     LOG_TRACE<<ss.str().c_str();
-    poller_.reset(new Poller(this));
+//    poller_.reset(new Poller(this));
+//    poller_.reset(Poller::newDefaultPoller(this));
     if(t_loopInThisThread)
     {
         ss.clear();
@@ -40,12 +52,18 @@ threadId_(std::this_thread::get_id(),::syscall(SYS_gettid))
     {
         t_loopInThisThread=this;
     }
+    wakeupChannel_->setReadCallback(std::bind(&EventLoop::handleRead,this));
+    wakeupChannel_->enableReading();
 }
 
 EventLoop::~EventLoop()
 {
-    assert(!looping_);
-    t_loopInThisThread=NULL;
+    LOG_DEBUG << "EventLoop " << this << " of thread " << threadId_.second
+              << " destructs in thread " << ::syscall(SYS_gettid);
+    wakeupChannel_->disableAll();
+    wakeupChannel_->remove();
+    ::close(wakeupFd_);
+    t_loopInThisThread = NULL;
 }
 
 void EventLoop::loop()
@@ -54,14 +72,28 @@ void EventLoop::loop()
     assertInLoopThread();
     looping_= true;
     quit_= false;
+    LOG_TRACE<<"EventLoop "<<this<<" start looping";
     while(!quit_)
     {
         activeChanels_.clear();
-        poller_->poll(kPollTimeMs,&activeChanels_);
-        for(ChannelList::iterator it=activeChanels_.begin();it!=activeChanels_.end();++it)
+        pollReturnTime_=poller_->poll(kPollTimeMs,&activeChanels_);
+        ++iteration_;
+        if(Logger::logLevel()<=Logger::TRACE)
         {
-           //FIXME (*it)->handleEvent();
+            printActiveChannels();
         }
+        eventHandling_=true;
+//        for(ChannelList::iterator it=activeChanels_.begin();it!=activeChanels_.end();++it)
+//        {
+//           //FIXME (*it)->handleEvent();
+//        }
+        for(const auto &it:activeChanels_)
+        {
+            currentActiveChannel_=it;
+            currentActiveChannel_->handleEvent(pollReturnTime_);
+        }
+        currentActiveChannel_=NULL;
+        eventHandling_= false;
         doPendingFunctors();
     }
     LOG_TRACE<<"EventLoop "<< this<<" stop running";
@@ -70,11 +102,11 @@ void EventLoop::loop()
 
 void EventLoop::abortNotInLoopThread()
 {
-    std::stringstream ss;
-    ss<< "EventLoop::abortNotInLoopThread - EventLoop " << this
+//    std::stringstream ss;
+    LOG_FATAL<< "EventLoop::abortNotInLoopThread - EventLoop " << this
       << " was created in threadId_ = " << threadId_.second
       << ", current thread id = " <<::syscall(SYS_gettid);
-    LOG_FATAL<<ss.str().c_str();
+//    LOG_FATAL<<ss.str().c_str();
 }
 
 void EventLoop::quit()
@@ -115,7 +147,7 @@ void EventLoop::runInLoop(EventLoop::Functor cb)
     if(isInLoopThread()){
         cb();
     } else{
-        queueInLoop(cb);
+        queueInLoop(std::move(cb));
     }
 }
 
@@ -139,9 +171,13 @@ void EventLoop::doPendingFunctors()
         std::lock_guard<std::mutex> lock(mutex_);
         functors.swap(pendingFunctors_);
     }
-    for(int i=0;i<functors.size();++i)
+//    for(int i=0;i<functors.size();++i)
+//    {
+//        functors[i]();
+//    }
+    for(const auto& functor:functors)
     {
-        functors[i]();
+        functor();
     }
     callingPendingFunctors_= false;
 }
@@ -172,8 +208,47 @@ void EventLoop::removeChannel(Channel* channel)
     assertInLoopThread();
     if(eventHandling_)
     {
+        //当前channel为正在处理的channel或者根本不在activeChanels_中直接出错,程序终止
         assert(currentActiveChannel_==channel||
         std::find(activeChanels_.begin(),activeChanels_.end(),channel)==activeChanels_.end());
     }
     poller_->removeChannel(channel);
+}
+
+size_t EventLoop::queueSize() const
+{
+    std::lock_guard<std::mutex> lock(mutex_);
+    return pendingFunctors_.size();
+}
+
+void EventLoop::cancel(TimerId timerId)
+{
+    return  timerQueue_->cancel(timerId);
+}
+
+bool EventLoop::hasChannel(Channel *channel)
+{
+    //只有channel所属的loop才有继续查找的必要
+    assert(channel->ownerloop()==this);
+    assertInLoopThread();
+    return poller_->hasChannel(channel);
+}
+
+void EventLoop::printActiveChannels() const
+{
+    for (const Channel* channel : activeChanels_)
+    {
+        LOG_TRACE << "{" << channel->reventsToString() << "} ";
+    }
+}
+
+int EventLoop::createWakeupfd()
+{
+    int evtfd = ::eventfd(0, EFD_NONBLOCK | EFD_CLOEXEC);
+    if (evtfd < 0)
+    {
+        LOG_SYSERR << "Failed in eventfd";
+        abort();
+    }
+    return evtfd;
 }

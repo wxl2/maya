@@ -20,13 +20,27 @@ namespace net{
 class EventLoopThreadPool:nocopyable
 {
 public:
-    EventLoopThreadPool(EventLoop* baseLoop);
+    typedef std::function<void(EventLoop*)> ThreadInitCallback;
+
+    EventLoopThreadPool(EventLoop* baseLoop,const string& name);
     ~EventLoopThreadPool();
+
     void setThreadNum(int numThreads){numThread_=numThreads;}
-    void start();
+    void start(const ThreadInitCallback& cb=ThreadInitCallback());
     EventLoop* getNextLoop();
+
+    EventLoop* getLoopForHash(size_t hashCode);
+
+    std::vector<EventLoop*> getAllLoops();
+
+    bool started() const
+    {return started_;}
+
+    const string& name()const
+    {return name_;}
 private:
-    EventLoop* loop_;
+    EventLoop* baseLoop_;
+    string name_;
     bool started_;
     int numThread_;
     int next_;

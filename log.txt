@@ -12,3 +12,9 @@
 
 #2020-11-03
 完成Buffer类的编写
+
+#2020-11-05
+创建完所有文件,至此不再创建新的文件.
+
+#2020-11-10
+改变Poller类新增EPoller和PollPoller;Channel,EventLoop,EventLoopThread;EventLoopThreadPoll,Acceptor类完全完成

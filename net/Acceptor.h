@@ -17,7 +17,8 @@ namespace net{
     {
     public:
         typedef std::function<void(int sockfd,const InetAddress&)> NewConnectionCallback;
-        Acceptor(EventLoop* loop,const InetAddress& listenAddr);
+        Acceptor(EventLoop* loop,const InetAddress& listenAddr, bool reuseport);
+        ~Acceptor();
         void setNewConnectionCallback(const NewConnectionCallback& cb)
         {newConnectionCallback_=cb;}
 
@@ -30,6 +31,7 @@ namespace net{
         Channel acceptChannel_;
         NewConnectionCallback newConnectionCallback_;
         bool listenning_;
+        int idleFd_;//处理文件描述符耗尽
     };
 }
 }

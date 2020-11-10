@@ -7,6 +7,8 @@
 
 #include "../base/nocopyable.h"
 #include "../base/Types.h"
+#include "InetAddress.h"
+#include "Channel.h"
 #include <functional>
 #include <memory>
 
@@ -17,6 +19,7 @@ namespace net{
     class InetAddress;
 
 class Connector:nocopyable
+, public std::enable_shared_from_this<Connector>
 {
 public:
     typedef std::function<void(int sockfd)> NewConnectionCallback;
@@ -29,8 +32,31 @@ public:
     void restart();
     void stop();
 
+    const InetAddress& serverAddress() const{return servAddr_;}
+
 private:
+    enum States{kDisconnected,kConnecting,kConnected};
+    static const int kMaxRetryDelayMs=30*1000;
+    static const int kInitRetryDelayMs=500;
+
+    void setStates(States s){states_=s;}
+    void startInLoop();
+    void stopInLoop();
+    void connect();
+    void connecting(int sockfd);
+    void handleWrite();
+    void handleError();
+    void retry(int sockfd);
+    int removeAndResetChannel();
+    void resetChannel();
+
+    EventLoop* loop_;
     NewConnectionCallback  newConnectionCallback_;
+    InetAddress servAddr_;
+    States states_;
+    bool connect_;
+    std::unique_ptr<Channel> channel_;
+    int retryDelayMs_;
 };
 
 }//namespace net

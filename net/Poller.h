@@ -21,22 +21,34 @@ namespace net{
         typedef std::vector<Channel*> ChannelList;
 
         Poller(EventLoop* loop);
-        ~Poller();
+        virtual ~Poller();
 
-        Timestamp poll(int timeoutMs,ChannelList* activeChannels);
+        //调用I/O复用函数处理事件到来
+        //必须在I/O线程中调用 ==Must be called in the loop thread
+        virtual Timestamp poll(int timeoutMs,ChannelList* activeChannels)=0;
 
-        void updateChannel(Channel* channel);
-        void removeChannel(Channel* channel);
-        void assertInLoopThread(){ownerLoop_->assertInLoopThread();}
+        //更新I/O线程中的Channel监听的事件
+        //Must be called in the loop thread
+        virtual void updateChannel(Channel* channel)=0;
 
-    private:
-        void fillActiveChannels(int numEvents,ChannelList* activeChannels) const;
+        //当channel没有事件时,将其从I/O线程的监听列表中删除
+        //Must be called in the loop thread
+        virtual void removeChannel(Channel* channel) = 0;
 
-        typedef std::vector<struct pollfd> PollFdList;
+        //判断监听列表channels_中是否有这个channel
+        virtual bool hasChannel(Channel* channel) const;
+        void assertInLoopThread()const{ownerLoop_->assertInLoopThread();}
+
+        static Poller* newDefaultPoller(EventLoop* loop);
+
+    protected:
+//        void fillActiveChannels(int numEvents,ChannelList* activeChannels) const;
+
+//        typedef std::vector<struct pollfd> PollFdList;
         typedef std::map<int,Channel*> ChannelMap;
 
         EventLoop* ownerLoop_;
-        PollFdList pollfds_;
+//        PollFdList pollfds_;
         ChannelMap channels_;
     };
 }//namespace net

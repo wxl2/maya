@@ -16,7 +16,7 @@ set(net_SRCS
         Connector.cpp
         Epoller.cpp
         TcpClient.cpp
-        Poller.cpp)
+        PollPoller.cpp)
 
 
 add_library(net ${net_SRCS})
