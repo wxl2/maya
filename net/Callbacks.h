@@ -51,6 +51,11 @@ namespace net{
     typedef std::function<void (const TcpConnectionPtr&,
                                 Buffer*,
                                 Timestamp)> MessageCallback;
+
+    void defaultConnectionCallback(const TcpConnectionPtr& conn);
+    void defaultMessageCallback(const TcpConnectionPtr& conn,
+                                Buffer* buffer,
+                                Timestamp receiveTime);
 }//namespace net
 }//namespace maya
 #endif //MAYA_CALLBACKS_H

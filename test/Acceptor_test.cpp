@@ -23,7 +23,7 @@ int main()
     maya::net::InetAddress addr(9999);
     maya::net::EventLoop loop;
 
-    maya::net::Acceptor acceptor(&loop,addr);
+    maya::net::Acceptor acceptor(&loop,addr, true);
     acceptor.setNewConnectionCallback(newConnection);
     acceptor.listen();
     loop.loop();

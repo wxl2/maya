@@ -18,6 +18,7 @@ namespace net{
     class EventLoop;
     class InetAddress;
 
+    //连接器,负责发起连接,不负责创建socket
 class Connector:nocopyable
 , public std::enable_shared_from_this<Connector>
 {
@@ -28,8 +29,11 @@ public:
 
     void setNewConnectionCallback(const  NewConnectionCallback& cb){newConnectionCallback_=cb;}
 
+    //can be called in any thread
     void start();
+    //must be called in loop thread
     void restart();
+    //can be called in any thread
     void stop();
 
     const InetAddress& serverAddress() const{return servAddr_;}
@@ -46,6 +50,7 @@ private:
     void connecting(int sockfd);
     void handleWrite();
     void handleError();
+    //重试,重新连接
     void retry(int sockfd);
     int removeAndResetChannel();
     void resetChannel();
@@ -55,6 +60,7 @@ private:
     InetAddress servAddr_;
     States states_;
     bool connect_;
+    //将其中保存的channel注册到IO线程的监听列表中,而后继续利用这个指针来发起连接并注册到IO线程中
     std::unique_ptr<Channel> channel_;
     int retryDelayMs_;
 };

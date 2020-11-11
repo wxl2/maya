@@ -120,6 +120,7 @@ namespace net {
         bool eventHandling_;//用于事件处理
         bool callingPendingFunctors_;
         int64_t iteration_;//loop循环的次数
+        const std::pair<std::thread::id,pid_t> threadId_;
         int wakeupFd_;//用于唤醒IO线程
         Timestamp pollReturnTime_;
         std::unique_ptr<Channel> wakeupChannel_;//用于唤醒IO线程的channel,这个channel监听wakeupFd_是否有事件到来,有便会唤醒IO线程
@@ -131,7 +132,6 @@ namespace net {
         ChannelList activeChanels_;
         Channel* currentActiveChannel_;
 
-        const std::pair<std::thread::id,pid_t> threadId_;
     };
 }//namespace net
 }//namespace maya

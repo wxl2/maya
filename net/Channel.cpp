@@ -20,7 +20,8 @@ revents_(0),
 index_(-1),
 logHup_(true),
 eventHandling_(false),
-addedToLoop_(false)
+addedToLoop_(false),
+tied_(false)
 {
 }
 

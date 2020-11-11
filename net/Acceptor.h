@@ -27,8 +27,8 @@ namespace net{
     private:
         void handleRead();
         EventLoop* loop_;
-        Socket acceptSocket_;
-        Channel acceptChannel_;
+        Socket acceptSocket_;//监听套接字文件描述符
+        Channel acceptChannel_;//管理监听套接字
         NewConnectionCallback newConnectionCallback_;
         bool listenning_;
         int idleFd_;//处理文件描述符耗尽

@@ -46,9 +46,10 @@ namespace net{
         bool isNoneEvent() const{return events_==kNoneEvent;}
 
         //监听读事件，在events_中添加读事件，调用update将其添加到监听队列
-        void enableReading(){events_|=kReadEvent;update();}
-        void enableWriting(){events_|kWriteEvent;update();}
-        void disableWriting(){events_&~kWriteEvent;update();}
+        void enableReading() { events_ |= kReadEvent; update(); }
+        void disableReading() { events_ &= ~kReadEvent; update(); }
+        void enableWriting() { events_ |= kWriteEvent; update(); }
+        void disableWriting() { events_ &= ~kWriteEvent; update(); }
         void disableAll(){events_=kNoneEvent;update();}
         bool isWriting() const{return events_&kWriteEvent;}
         bool isReading() const{return events_&kReadEvent;}
@@ -64,6 +65,7 @@ namespace net{
 
         void doNotLogHup(){logHup_= false;}
 
+        //将当前channel从IO线程的监听列表移除
         void remove();
         EventLoop* ownerloop(){return loop_;}
 
