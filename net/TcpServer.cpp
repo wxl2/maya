@@ -19,7 +19,9 @@ name_(nameArg),
 acceptor_(new Acceptor(loop,listenAddr,option==kReusePort)),
 threadPool_(new EventLoopThreadPool(loop,nameArg)),
 connectionCallback_(defaultConnectionCallback),
-messageCallback_(defaultMessageCallback)
+messageCallback_(defaultMessageCallback),
+started_(0),
+nextConnId_(1)
 {
     acceptor_->setNewConnectionCallback(std::bind(&TcpServer::newConnection,this,_1,_2));
 }
@@ -88,7 +90,7 @@ void TcpServer::removeConnection(const TcpConnectionPtr &conn)
 void TcpServer::removeConnectionInLoop(const TcpConnectionPtr &conn)
 {
     loop_->assertInLoopThread();
-    LOG_INFO<<"TcpServer::removeConnectionInLoop ["<<name_<<"] - connection "/*<<conn->name()*/;
+    LOG_INFO<<"TcpServer::removeConnectionInLoop ["<<name_<<"] - connection "<<conn->name();
     ssize_t n = connections_.erase(conn->name());
     assert(n==1);
     (void )n;

@@ -4,8 +4,8 @@
 
 #ifndef MAYA_EPOLLER_H
 #define MAYA_EPOLLER_H
-#include "../base/nocopyable.h"
-#include "../base/Types.h"
+#include "base/nocopyable.h"
+#include "base/Types.h"
 #include "Poller.h"
 
 struct epoll_event;

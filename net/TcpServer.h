@@ -5,8 +5,8 @@
 #ifndef MAYA_TCPSERVER_H
 #define MAYA_TCPSERVER_H
 
-#include "../base/nocopyable.h"
-#include "../base/Types.h"
+#include "base/nocopyable.h"
+#include "base/Types.h"
 #include "TcpConnection.h"
 #include "Callbacks.h"
 #include "Acceptor.h"

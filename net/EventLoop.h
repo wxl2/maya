@@ -11,9 +11,9 @@
 #include <thread>
 #include <functional>
 #include <mutex>
-#include "../base/Timestamp.h"
-#include "../base/nocopyable.h"
-#include "../base/Logging.h"
+#include "base/Timestamp.h"
+#include "base/nocopyable.h"
+#include "base/Logging.h"
 #include "TimerId.h"
 #include "TimerQueue.h"
 #include "Callbacks.h"

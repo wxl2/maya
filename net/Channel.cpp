@@ -57,6 +57,7 @@ Channel::~Channel()
         ///如果IO线程中还有这个channel,不能被析够,终止程序
         assert(!loop_->hasChannel(this));
     }
+    LOG_DEBUG<<"Channel::dtor["<<this<<"]";
 }
 
 void Channel::tie(const std::shared_ptr<void> &obj)

@@ -4,9 +4,9 @@
 
 #ifndef MAYA_INETADDRESS_H
 #define MAYA_INETADDRESS_H
-#include "../base/copyable.h"
+#include "base/copyable.h"
 #include <arpa/inet.h>
-#include "../base/Types.h"
+#include "base/Types.h"
 namespace maya{
 namespace net{
 namespace sockets{

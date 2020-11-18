@@ -5,8 +5,8 @@
 #ifndef MAYA_TIMERQUEUE_H
 #define MAYA_TIMERQUEUE_H
 
-#include "../base/nocopyable.h"
-#include "../base/Timestamp.h"
+#include "base/nocopyable.h"
+#include "base/Timestamp.h"
 #include "Callbacks.h"
 #include "Channel.h"
 
@@ -23,7 +23,7 @@ namespace net{
     class TimerQueue:nocopyable
     {
     public:
-        TimerQueue(EventLoop* loop);
+        explicit TimerQueue(EventLoop* loop);
         ~TimerQueue();
 
         TimerId addTimer(const TimerCallback& cb,Timestamp when,double interval);
@@ -38,6 +38,7 @@ namespace net{
         void addTimerInLoop(Timer* timer);
         void handleRead();
 
+
         void cancelInLoop(TimerId timerId);
         std::vector<Entry> getExpired(Timestamp now);//返回到期时间列表
         void reset(const std::vector<Entry>& expired,Timestamp now);
@@ -46,7 +47,7 @@ namespace net{
 
         EventLoop* loop_;
         const int timerfd_;
-        Channel timerfdChannel;
+        Channel timerfdChannel_;
         TimerList timers_;
 
         //for cancel()

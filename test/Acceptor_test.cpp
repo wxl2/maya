@@ -2,11 +2,11 @@
 // Created by wxl on 2020/11/4.
 //
 
-#include "../net/Acceptor.h"
-#include "../net/SocketsOps.h"
-#include "../net/InetAddress.h"
+#include "net/Acceptor.h"
+#include "net/SocketsOps.h"
+#include "net/InetAddress.h"
 #include "Endian.h"
-#include "../net/EventLoop.h"
+#include "net/EventLoop.h"
 #include <unistd.h>
 using namespace maya;
 using namespace maya::net;

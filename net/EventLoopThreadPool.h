@@ -5,8 +5,8 @@
 #ifndef MAYA_EVENTLOOPTHREADPOOL_H
 #define MAYA_EVENTLOOPTHREADPOOL_H
 
-#include "../base/Types.h"
-#include "../base/nocopyable.h"
+#include "base/Types.h"
+#include "base/nocopyable.h"
 
 #include <functional>
 #include <memory>

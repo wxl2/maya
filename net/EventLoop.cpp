@@ -37,16 +37,16 @@ wakeupFd_(EventLoop::createWakeupfd()),
 wakeupChannel_(new Channel(this,wakeupFd_)),
 currentActiveChannel_(NULL)
 {
-    std::stringstream ss;
-    ss<<"EventLoop created "<<this<<" in thread "<<threadId_.second;
-    LOG_TRACE<<ss.str().c_str();
+//    std::stringstream ss;
+//    ss<<"EventLoop created "<<this<<" in thread "<<threadId_.second;
+    LOG_TRACE<<"EventLoop created "<<this<<" in thread "<<threadId_.second;
 //    poller_.reset(new Poller(this));
 //    poller_.reset(Poller::newDefaultPoller(this));
     if(t_loopInThisThread)
     {
-        ss.clear();
-        ss<<"Another EventLoop "<<t_loopInThisThread<<" exists in this thread "<<threadId_.second;
-        LOG_FATAL<<ss.str().c_str();
+//        ss.clear();
+//        ss<<"Another EventLoop "<<t_loopInThisThread<<" exists in this thread "<<threadId_.second;
+        LOG_FATAL<<"Another EventLoop "<<t_loopInThisThread<<" exists in this thread "<<threadId_.second;
     }
     else
     {

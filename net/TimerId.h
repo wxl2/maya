@@ -5,7 +5,7 @@
 #ifndef MAYA_TIMERID_H
 #define MAYA_TIMERID_H
 
-#include "../base/copyable.h"
+#include "base/copyable.h"
 #include <stdint.h>
 #include <stdio.h>
 

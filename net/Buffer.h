@@ -4,9 +4,9 @@
 
 #ifndef MAYA_BUFFER_H
 #define MAYA_BUFFER_H
-#include "../base/copyable.h"
+#include "base/copyable.h"
 #include "Endian.h"
-#include "../base/Types.h"
+#include "base/Types.h"
 
 #include <algorithm>
 #include <vector>

@@ -40,6 +40,18 @@ namespace detail {
             LOG_SYSERR << "timerfd_settime()";
         }
     }
+
+    void readTimerfd(int timerfd, Timestamp now)
+    {
+        uint64_t howmany;
+        ssize_t n = ::read(timerfd, &howmany, sizeof howmany);
+        LOG_TRACE << "TimerQueue::handleRead() " << howmany << " at " << now.toString();
+        if (n != sizeof howmany)
+        {
+            LOG_ERROR << "TimerQueue::handleRead() reads " << n << " bytes instead of 8";
+        }
+    }
+
 }//namespace detail
 }//namespace net
 }//namespace maya
@@ -50,15 +62,17 @@ using namespace maya::net::detail;
 TimerQueue::TimerQueue(EventLoop *loop)
 :loop_(loop),
 timerfd_(::timerfd_create(CLOCK_MONOTONIC,TFD_NONBLOCK | TFD_CLOEXEC)),
-timerfdChannel(loop,timerfd_),
+timerfdChannel_(loop,timerfd_),
 timers_()
 {
-    timerfdChannel.setReadCallback(std::bind(&TimerQueue::handleRead,this));
-    timerfdChannel.enableReading();
+    timerfdChannel_.setReadCallback(std::bind(&TimerQueue::handleRead,this));
+    timerfdChannel_.enableReading();
 }
 
 TimerQueue::~TimerQueue()
 {
+    timerfdChannel_.disableAll();
+    timerfdChannel_.remove();
     ::close(timerfd_);
     for(const Entry& timer:timers_)
     {
@@ -102,7 +116,20 @@ void TimerQueue::handleRead()
 {
     loop_->assertInLoopThread();
     Timestamp now(Timestamp::now());
+    readTimerfd(timerfd_, now);
 
+    std::vector<Entry> expired = getExpired(now);
+
+    callingExpiredTimers_ = true;
+    cancelingTimers_.clear();
+    // safe to callback outside critical section
+    for (const Entry& it : expired)
+    {
+        it.second->run();
+    }
+    callingExpiredTimers_ = false;
+
+    reset(expired, now);
 }
 
 void TimerQueue::cancel(TimerId timerId)

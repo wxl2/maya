@@ -1,8 +1,8 @@
 //
 // Created by wxl on 2020/10/22.
 //
-#include "../net/EventLoop.h"
-#include "../net/Channel.h"
+#include "net/EventLoop.h"
+#include "net/Channel.h"
 #include <unistd.h>
 #include <sys/syscall.h>
 #include <thread>

@@ -10,8 +10,8 @@
 #include <thread>
 #include <functional>
 #include <memory>
-#include "../base/Types.h"
-#include "../base/nocopyable.h"
+#include "base/Types.h"
+#include "base/nocopyable.h"
 namespace maya{
 namespace net{
 

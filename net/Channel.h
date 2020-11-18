@@ -5,8 +5,8 @@
 #ifndef MAYA_CHANNEL_H
 #define MAYA_CHANNEL_H
 
-#include "../base/nocopyable.h"
-#include "../base/Timestamp.h"
+#include "base/nocopyable.h"
+#include "base/Timestamp.h"
 #include <functional>
 #include <memory>
 

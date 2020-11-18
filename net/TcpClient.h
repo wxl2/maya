@@ -4,8 +4,8 @@
 
 #ifndef MAYA_TCPCLIENT_H
 #define MAYA_TCPCLIENT_H
-#include "../base/nocopyable.h"
-#include "../base/Types.h"
+#include "base/nocopyable.h"
+#include "base/Types.h"
 #include "TcpConnection.h"
 #include <memory>
 #include <mutex>

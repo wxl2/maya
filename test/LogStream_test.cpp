@@ -2,7 +2,7 @@
 // Created by wxl on 2020/10/12.
 //
 
-#include "../base/LogStream.h"
+#include "base/LogStream.h"
 #include <iostream>
 
 using namespace maya;

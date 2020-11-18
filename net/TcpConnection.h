@@ -5,7 +5,7 @@
 #ifndef MAYA_TCPCONNECTION_H
 #define MAYA_TCPCONNECTION_H
 
-#include "../base/nocopyable.h"
+#include "base/nocopyable.h"
 #include "Buffer.h"
 #include "InetAddress.h"
 #include "Callbacks.h"
@@ -76,8 +76,10 @@ namespace net{
         void setCloseCallback(const CloseCallback& cb)
         {closeCallback_=cb;}
 
-        void connectEstablished();
-        void connectDestroyed();
+        // called when TcpServer accepts a new connection
+        void connectEstablished();   // should be called only once
+        // called when TcpServer has removed me from its map
+        void connectDestroyed();  // should be called only once
 
     private:
         ///正在连接,已经连接,已经关闭连接,正在关闭连接

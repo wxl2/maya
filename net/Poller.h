@@ -5,9 +5,9 @@
 #ifndef MAYA_POLLER_H
 #define MAYA_POLLER_H
 
-#include "../base/nocopyable.h"
+#include "base/nocopyable.h"
 #include "EventLoop.h"
-#include "../base/Timestamp.h"
+#include "base/Timestamp.h"
 #include <vector>
 #include <map>
 #include <sys/poll.h>

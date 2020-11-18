@@ -5,8 +5,8 @@
 #ifndef MAYA_CONNECTOR_H
 #define MAYA_CONNECTOR_H
 
-#include "../base/nocopyable.h"
-#include "../base/Types.h"
+#include "base/nocopyable.h"
+#include "base/Types.h"
 #include "InetAddress.h"
 #include "Channel.h"
 #include <functional>

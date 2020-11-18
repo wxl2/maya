@@ -2,9 +2,9 @@
 // Created by wxl on 2020/10/18.
 //
 
-#include "../base/ThreadPool.h"
-#include "../base/CountDownLatch.h"
-#include "../base/Logging.h"
+#include "base/ThreadPool.h"
+#include "base/CountDownLatch.h"
+#include "base/Logging.h"
 
 #include <stdio.h>
 #include <string>

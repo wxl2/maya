@@ -4,7 +4,7 @@
 
 #include "TcpConnection.h"
 #include "EventLoop.h"
-#include "../base/Logging.h"
+#include "base/Logging.h"
 #include "SocketsOps.h"
 #include "Socket.h"
 #include "Channel.h"
@@ -40,7 +40,7 @@ highWaterMark_(60*1024*1024)
 {
     channel_->setReadCallback(std::bind(&TcpConnection::handleRead, this,_1));
     channel_->setWriteCallback(std::bind(&TcpConnection::handleWrite, this));
-    channel_->setCloseCallback(std::bind(&TcpConnection::handleError, this));
+    channel_->setCloseCallback(std::bind(&TcpConnection::handleClose, this));
     channel_->setErrorCallback(std::bind(&TcpConnection::handleError, this));
     LOG_DEBUG<<"TcpConnection::ctor["<< name_<<"] at"<< this<<" fd = "<<sockfd;
     socket_->setKeepAlive(true);
@@ -148,8 +148,8 @@ void TcpConnection::sendInLoop(const void *data, size_t len)
     {
         size_t oldLen=outputBuffer_.readableBytes();
         if(oldLen+remaining>highWaterMark_
-        &&oldLen<highWaterMark_
-        &&highWaterMarkCallback_)
+            &&oldLen<highWaterMark_
+            &&highWaterMarkCallback_)
         {
             loop_->queueInLoop(std::bind(highWaterMarkCallback_, shared_from_this(),oldLen+remaining));
         }
@@ -267,9 +267,11 @@ void TcpConnection::connectDestroyed()
     loop_->assertInLoopThread();
     assert(state_==kConnected);
     setState(kDisconnected);
-    //FIXME channel_->disableAll();
+    //FIXME
+    channel_->disableAll();
     connectionCallback_(shared_from_this());
-    loop_->removeChannel(get_pointer(channel_));
+    //loop_->removeChannel(get_pointer(channel_));
+    channel_->remove();
 }
 
 
@@ -298,7 +300,7 @@ void TcpConnection::handleClose()
     loop_->assertInLoopThread();
     LOG_TRACE<<"TcpConnection::handleClose state"<<state_;
     assert(state_==kConnected);
-//FIXME    channel_->disableAll();
+    channel_->disableAll();
     closeCallback_(shared_from_this());
 }
 

@@ -6,8 +6,8 @@
 #define MAYA_CALLBACKS_H
 #include <functional>
 #include <memory>
-#include "../base/Types.h"
-#include "../base/Timestamp.h"
+#include "base/Types.h"
+#include "base/Timestamp.h"
 
 namespace maya{
     using std::placeholders::_1;

@@ -2,8 +2,8 @@
 // Created by wxl on 2020/10/12.
 //
 
-#include "../base/FileUtil.h"
-#include "../base/LogFile.h"
+#include "base/FileUtil.h"
+#include "base/LogFile.h"
 #include <functional>
 #include <unistd.h>
 #include <thread>

@@ -5,7 +5,7 @@
 #ifndef MAYA_SOCKET_H
 #define MAYA_SOCKET_H
 
-#include "../base/nocopyable.h"
+#include "base/nocopyable.h"
 
 struct tcp_info;
 namespace maya{

@@ -6,8 +6,8 @@
 #define MAYA_TIMER_H
 #include <atomic>
 #include "Callbacks.h"
-#include "../base/Timestamp.h"
-#include "../base/nocopyable.h"
+#include "base/Timestamp.h"
+#include "base/nocopyable.h"
 
 namespace maya{
 namespace net{

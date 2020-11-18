@@ -5,7 +5,7 @@
 #include "InetAddress.h"
 #include "Endian.h"
 #include "SocketsOps.h"
-#include "../base/Logging.h"
+#include "base/Logging.h"
 #include <netdb.h>
 
 using namespace maya;
