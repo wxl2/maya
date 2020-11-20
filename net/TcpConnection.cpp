@@ -31,6 +31,7 @@ TcpConnection::TcpConnection(EventLoop *loop, const string &name, int sockfd, co
                              const InetAddress perrAddr)
 :loop_(CHECK_NOTNULL(loop)),
 name_(name),
+state_(kConnecting),
 reading_(true),
 socket_(new Socket(sockfd)),
 channel_(new Channel(loop,sockfd)),
@@ -118,12 +119,14 @@ void TcpConnection::sendInLoop(const void *data, size_t len)
         LOG_WARN<<"disconnected, give up writing";
         return;
     }
+    //如果在loop中没有关注写事件,并且发送缓冲区没有数据。那么可以尝试直接write写
     if(!channel_->isWriting()&&outputBuffer_.readableBytes()==0)
     {
         nwrote=::write(channel_->fd(),data,len);
         if(nwrote>=0)
         {
             remaining=len-nwrote;
+            //设置了writeCompleteCallback_才会调用
             if(remaining==0 && writeCompleteCallback_)
             {
                 loop_->queueInLoop(std::bind(writeCompleteCallback_,shared_from_this()));
@@ -147,6 +150,7 @@ void TcpConnection::sendInLoop(const void *data, size_t len)
     if(!faultError&&remaining>0)
     {
         size_t oldLen=outputBuffer_.readableBytes();
+        //要发送的数据大于highWaterMark_
         if(oldLen+remaining>highWaterMark_
             &&oldLen<highWaterMark_
             &&highWaterMarkCallback_)

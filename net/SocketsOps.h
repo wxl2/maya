@@ -10,7 +10,7 @@
 namespace maya{
 namespace net{
 namespace sockets{
-
+    //封装一系列socket操作
     int createNonbolckingOrDie();
     int connect(int sockfd,const struct sockaddr_in* addr);
     void bindOrDie(int sockfd, const struct sockaddr_in* addr);

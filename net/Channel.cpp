@@ -62,6 +62,8 @@ Channel::~Channel()
 
 void Channel::tie(const std::shared_ptr<void> &obj)
 {
+    //捆绑Channel的拥有者，防止Channel还在使用时，
+    //拥有者将Channel析构了。
     tie_=obj;
     tied_= true;
 }

@@ -32,6 +32,7 @@ namespace FileUtil{
 
         FILE *fp_;
         char buffer_[60*1024];
+        //已经写入的数据长度
         off_t writtenBytes_;
     };
 }//namespace FileUtil

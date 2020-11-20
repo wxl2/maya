@@ -62,6 +62,7 @@ namespace net{
         WriteCompleteCallback writeCompleteCallback_;
         bool retry_;
         bool connect_;
+        //用于标识已经建立过多少个连接
         int nextConnId_;
         mutable std::mutex mutex_;
         TcpConnectionPtr connection_;

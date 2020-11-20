@@ -12,6 +12,7 @@ namespace net
 {
 namespace sockets
 {
+    //网络字节序和主机字节序之间的转换
     inline uint64_t hostToNetwork64(uint64_t host64)
     {
         return htobe64(host64);

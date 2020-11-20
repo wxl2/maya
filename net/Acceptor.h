@@ -23,9 +23,12 @@ namespace net{
         {newConnectionCallback_=cb;}
 
         bool listenning() const{return listenning_;}
+        //开启监听,注册读事件
         void listen();
     private:
+        //处理读事件到来
         void handleRead();
+        //所属的EventLoop
         EventLoop* loop_;
         Socket acceptSocket_;//监听套接字文件描述符
         Channel acceptChannel_;//管理监听套接字

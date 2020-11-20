@@ -20,7 +20,7 @@ bool benchmark = false;
 
 int main(int argc, char* argv[])
 {
-    Logger::setLogLevel(Logger::DEBUG);
+    Logger::setLogLevel(Logger::TRACE);
     int numThreads = 0;
     if (argc > 1)
     {

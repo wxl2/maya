@@ -76,9 +76,9 @@ namespace net{
         void setCloseCallback(const CloseCallback& cb)
         {closeCallback_=cb;}
 
-        // called when TcpServer accepts a new connection
+        // called when TcpServer accepts a new connection 连接到来
         void connectEstablished();   // should be called only once
-        // called when TcpServer has removed me from its map
+        // called when TcpServer has removed me from its map 连接断开
         void connectDestroyed();  // should be called only once
 
     private:
@@ -86,6 +86,7 @@ namespace net{
         enum StateE{kConnecting,kConnected,kDisconnected,kDisconnecting};
         void setState(StateE e){state_=e;}
         void handleRead(Timestamp receiveTime);
+        ///内核发送缓冲区有空间了，回调该函数
         void handleWrite();
         void handleClose();
         void handleError();
@@ -106,9 +107,15 @@ namespace net{
        std::unique_ptr<Channel> channel_;
        InetAddress localAddr_;
        InetAddress peerAddr_;
+
+       //FIXME:采用level tigger 即条件触发
+
+       //当有连接到来或者断开时回调,传入的函数应该处理连接到来的链接和连接断开两种情况
        ConnectionCallback connectionCallback_;
        MessageCallback messageCallback_;
+       //低水位回调,即数据都写入内核缓冲区的回调
        WriteCompleteCallback writeCompleteCallback_;
+       //高水位回调,如果输出缓冲区长度打与用户所指定的大小即highWaterMark_中的值,便回调highWaterMarkCallback_
        HighWaterMarkCallback highWaterMarkCallback_;
        CloseCallback closeCallback_;
        size_t highWaterMark_;

@@ -102,6 +102,7 @@ int  sockets::accept(int sockfd, struct sockaddr_in* addr)
                 break;
         }
     }
+    return connfd;
 }
 
 ssize_t sockets::read(int sockfd,void* buf,size_t count)

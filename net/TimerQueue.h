@@ -20,6 +20,7 @@ namespace net{
     class Timer;
     class TimerId;
 
+    /// https://www.cnblogs.com/Solstice/archive/2011/02/06/1949555.html
     class TimerQueue:nocopyable
     {
     public:

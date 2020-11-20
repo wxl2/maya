@@ -107,7 +107,7 @@ bool HttpContext::parseRequest(Buffer *buf, Timestamp receiveTime)
         }
         else if(state_==kExpectBody)
         {
-            //FIXME : add
+            //FIXME : add 处理请求体部分
         }
     }
     return ok;

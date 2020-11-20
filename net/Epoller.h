@@ -37,6 +37,7 @@ namespace net{
         //调用epoll_ctl改变channel的监听事件
         void update(int operation,Channel* channel);
 
+        //事件监听列表
         typedef std::vector<struct epoll_event> EventList;
 
         int epollfd_;

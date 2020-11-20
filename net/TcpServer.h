@@ -73,6 +73,7 @@ namespace net{
         ThreadInitCallback threadInitCallback_;
         WriteCompleteCallback writeCompleteCallback_;
         std::atomic<int> started_;
+        //用于标识已经建立过多少个连接
         int nextConnId_;
         ConnectionMap connections_;
     };

@@ -82,25 +82,25 @@ void Connector::connect()
     switch (saveErrno)
     {
         case 0:
-        case EINPROGRESS:
-        case EINTR:
-        case EISCONN:
+        case EINPROGRESS://套接字为非阻塞套接字，且连接请求没有立即完成
+        case EINTR://系统调用的执行由于捕获中断而中止
+        case EISCONN://已经连接到该套接字
             connecting(sockfd);
             break;
-        case EAGAIN:
-        case EADDRINUSE:
-        case EADDRNOTAVAIL:
-        case ECONNREFUSED:
-        case ENETUNREACH:
+        case EAGAIN://没有足够空闲的本地端口,重试
+        case EADDRINUSE://本地地址处于使用状态
+        case EADDRNOTAVAIL://指定的地址不可用
+        case ECONNREFUSED://远程地址并没有处于监听状态
+        case ENETUNREACH://网络不可到达
             retry(sockfd);
             break;
-        case EACCES:
-        case EPERM:
-        case EAFNOSUPPORT:
-        case EALREADY:
-        case EBADF:
-        case EFAULT:
-        case ENOTSOCK:
+        case EACCES://权限不足
+        case EPERM://不允许操作   EACCES, EPERM 用户试图在套接字广播标志没有设置的情况下连接广播地址或由于防火墙策略导致连接失败
+        case EAFNOSUPPORT://参数serv_add中的地址非合法地址
+        case EALREADY://套接字为非阻塞套接字，并且原来的连接请求还未完成
+        case EBADF://非法的文件描述符
+        case EFAULT://指向套接字结构体的地址非法
+        case ENOTSOCK://文件描述符不与套接字相关
             LOG_SYSERR<<"connect error in Connection::startInLoop"<<saveErrno;
             sockets::close(sockfd);
             break;
@@ -126,8 +126,10 @@ void Connector::connecting(int sockfd)
 int Connector::removeAndResetChannel()
 {
     channel_->disableAll();
+    //先将其从监听列表中移除
     channel_->remove();
     int sockfd=channel_->fd();
+    //再将Channel对象析构
     loop_->queueInLoop(std::bind(&Connector::resetChannel, this));
     return sockfd;
 }
@@ -140,6 +142,7 @@ void Connector::resetChannel()
 void Connector::handleWrite()
 {
     LOG_TRACE<<"Connector::handleWrite"<<states_;
+    //当channel监听的文件描述符可写时,表示可以建立连接,回调上层函数建立连接
     if(states_==kConnecting)
     {
         int sockfd=removeAndResetChannel();

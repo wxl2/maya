@@ -18,7 +18,7 @@ namespace net{
     class EventLoop;
     class InetAddress;
 
-    //连接器,负责发起连接,不负责创建socket
+    //连接器,负责发起连接,不负责创建Socket
 class Connector:nocopyable
 , public std::enable_shared_from_this<Connector>
 {
@@ -47,6 +47,7 @@ private:
     void startInLoop();
     void stopInLoop();
     void connect();
+    //连接建立,进行后续操作
     void connecting(int sockfd);
     void handleWrite();
     void handleError();
@@ -62,6 +63,7 @@ private:
     bool connect_;
     //将其中保存的channel注册到IO线程的监听列表中,而后继续利用这个指针来发起连接并注册到IO线程中
     std::unique_ptr<Channel> channel_;
+    //重连间隔时长,单位是毫秒
     int retryDelayMs_;
 };
 
