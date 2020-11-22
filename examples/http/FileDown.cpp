@@ -22,7 +22,7 @@ url_(url)
 {
 }
 
-void FileDown::onRequest(const HttpRequest &req, HttpResponse *resp)
+void FileDown::doGet(const HttpRequest &req, HttpResponse *resp)
 {
     std::cout << "Headers " << req.methodString() << " " << req.path() << std::endl;
     if (!benchmark_)
@@ -33,48 +33,42 @@ void FileDown::onRequest(const HttpRequest &req, HttpResponse *resp)
             std::cout << header.first << ": " << header.second << std::endl;
         }
     }
-
-    if(req.method()==HttpRequest::kGet) {
-        if (req.path() == "/") {
-            std::vector<std::string> filelist_;
-            resp->setStatusCode(HttpResponse::k200Ok);
-            if (filelist_.empty()) {
-                if (readDir(filelist_, url_) < 0) {
-                    serverError(HttpResponse::k500ServerError, resp);
-                    return;
-                }
-            }
-            resp->setStatusMessage("OK");
-            resp->setContentType("text/html;charset=utf-8");
-            resp->setContentLanguage("zh-CN");
-            resp->addHeader("Server", "Muduo");
-            string outhtml;
-            for (int i = 0; i < filelist_.size(); ++i) {
-                //<a href="http://www.w3school.com.cn">W3School</a>
-                outhtml += "<a href=\"";
-                outhtml += filelist_[i];
-                outhtml += "\">";
-                outhtml += filelist_[i] + "</a><br/>";
-            }
-            resp->setBody(outhtml);
-        } else if (req.path() == "/favicon.ico") {
-            resp->setStatusCode(HttpResponse::k200Ok);
-            resp->setStatusMessage("OK");
-            resp->setContentType("image/png");
-            resp->setBody(string(favicon, sizeof favicon));
-        } else {
-            int ret = judgePath(req.path());
-            if (ret > 0)
-                isFile(req.path(), ret, resp);
-            else if (ret == 0)
-                isDir(req.path(), resp);
-            else if (ret < 0)
-                fileNoExist(req.path(), resp);
-        }
-    }
-    else if(req.method()==HttpRequest::kPost)
+    if (req.path() == "/")
     {
-        //TODO:finish ths Post Method handle
+        std::vector<std::string> filelist_;
+        resp->setStatusCode(HttpResponse::k200Ok);
+        if (filelist_.empty()) {
+            if (readDir(filelist_, url_) < 0) {
+                serverError(HttpResponse::k500ServerError, resp);
+                return;
+            }
+        }
+        resp->setStatusMessage("OK");
+        resp->setContentType("text/html;charset=utf-8");
+        resp->setContentLanguage("zh-CN");
+        resp->addHeader("Server", "Muduo");
+        string outhtml;
+        for (int i = 0; i < filelist_.size(); ++i) {
+            //<a href="http://www.w3school.com.cn">W3School</a>
+            outhtml += "<a href=\"";
+            outhtml += filelist_[i];
+            outhtml += "\">";
+            outhtml += filelist_[i] + "</a><br/>";
+        }
+        resp->setBody(outhtml);
+    } else if (req.path() == "/favicon.ico") {
+        resp->setStatusCode(HttpResponse::k200Ok);
+        resp->setStatusMessage("OK");
+        resp->setContentType("image/png");
+        resp->setBody(string(favicon, sizeof favicon));
+    } else {
+        int ret = judgePath(req.path());
+        if (ret > 0)
+            isFile(req.path(), ret, resp);
+        else if (ret == 0)
+            isDir(req.path(), resp);
+        else if (ret < 0)
+            fileNoExist(req.path(), resp);
     }
 }
 
@@ -172,6 +166,8 @@ void FileDown::isFile(const string filename,int size,HttpResponse *resp)
             contentType="image/png";
         else if(type==".gif")
             contentType="image/gif";
+        else if(type==".html")
+            contentType="text/html;charset=utf-8";
         else
             contentType="application/octet-stream";
     }
@@ -235,6 +231,19 @@ void FileDown::fileNoExist(const string filename, HttpResponse *resp)
                    " not exist</p>"
                    "</body></html>");
     resp->setBody(outhtml);
+}
+
+void FileDown::doPost(const HttpRequest &req, HttpResponse *resp)
+{
+    //TODO:finish ths Post Method handle
+    resp->setStatusMessage("OK");
+    resp->setContentType("text/html;charset=utf-8");
+    resp->setContentLanguage("zh-CN");
+    resp->addHeader("Server", "Muduo");
+    string out;
+    out.append(req.path()+" ");
+    out.append(req.getBody());
+    resp->setBody(out);
 }
 
 FileDown::~FileDown()=default;

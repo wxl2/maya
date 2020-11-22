@@ -71,7 +71,11 @@ namespace net{
         {version_=version;}
         Version getVersion() const
         { return version_; }
+        void setBody(const string& body)
+        {body_=body;}
 
+        const string& getBody() const
+        {return body_;}
         bool setMethod(const char* start,const char* end)//传入一个请求方法的字符串
         {
             assert(method_==kInvalid);
@@ -202,6 +206,7 @@ namespace net{
         string path_;//http请求行的url
         string query_;//http请求行?后的参数
         Timestamp receiveTime_;//接收到请求的时间
+        string body_;
         std::map<string ,string > headers_;//Http请求头
     };
 }//namespace net

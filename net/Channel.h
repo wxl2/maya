@@ -105,6 +105,7 @@ namespace net{
         ///是否正在处理事件
         bool eventHandling_;
         ///FIXME:参考https://blog.csdn.net/H514434485/article/details/90339554
+        ///weak_ptr不增加share_ptr引用计数,但可以通过lock函数返回一个share_ptr从而增加其引用计数,如handEvent()中的tie_.lock()
         std::weak_ptr<void> tie_;
         bool tied_;
         ///是否已经加入到IO线程进行监听

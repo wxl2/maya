@@ -95,8 +95,12 @@ bool HttpContext::parseRequest(Buffer *buf, Timestamp receiveTime)
                 }
                 else
                 {
-                    state_=kGotAll;
-                    hasMore= false;
+                    state_=kExpectBody;
+                    if(request_.method()==HttpRequest::kGet)
+                    {
+                        state_ = kGotAll;
+                        hasMore = false;
+                    }
                 }
                 buf->retrieveUntil(clrf+2);
             }
@@ -108,6 +112,10 @@ bool HttpContext::parseRequest(Buffer *buf, Timestamp receiveTime)
         else if(state_==kExpectBody)
         {
             //FIXME : add 处理请求体部分
+            request_.setBody(string(buf->peek(),buf->readableBytes()));
+            buf->retrieveAll();
+            state_=kGotAll;
+            hasMore= false;
         }
     }
     return ok;

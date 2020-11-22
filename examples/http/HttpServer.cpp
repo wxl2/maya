@@ -31,7 +31,8 @@ HttpServer::HttpServer(EventLoop* loop,
                        const string& name,
                        TcpServer::Option option)
         : server_(loop, listenAddr, name, option),
-          httpCallback_(detail::defaultHttpCallback)
+          getCallback_(detail::defaultHttpCallback),
+          postCallback_(detail::defaultHttpCallback)
 {
     server_.setConnectionCallback(
             std::bind(&HttpServer::onConnection, this, _1));
@@ -43,6 +44,8 @@ void HttpServer::start()
 {
     LOG_WARN << "HttpServer[" << server_.name()
              << "] starts listenning on " << server_.ipPort();
+    if(initCallback_)
+        initCallback_();
     server_.start();
 }
 
@@ -91,7 +94,18 @@ void HttpServer::onRequest(const TcpConnectionPtr& conn, const HttpRequest& req)
     bool close = connection == "close" ||
                  (req.getVersion() == HttpRequest::kHttp10 && connection != "Keep-Alive");
     HttpResponse response(close);
-    httpCallback_(req, &response);
+    if(req.method()==HttpRequest::kGet)
+    {
+        doGet(req,&response);
+    }
+    else if(req.method()==HttpRequest::kPost)
+    {
+        doPost(req,&response);
+    }
+    else
+    {
+        detail::defaultHttpCallback(req,&response);
+    }
     Buffer buf;
     response.appendToBuffer(&buf);
     conn->send(&buf);
@@ -107,5 +121,15 @@ void HttpServer::onDisconnected(const TcpConnectionPtr &conn)
     connMap::const_iterator it= connMaps_.find(conn);
     assert(it!=connMaps_.end());
     connMaps_.erase(it);
+}
+
+void HttpServer::doPost(const HttpRequest &req, HttpResponse *resp)
+{
+    postCallback_(req,resp);
+}
+
+void HttpServer::doGet(const HttpRequest &req, HttpResponse *resp)
+{
+    getCallback_(req,resp);
 }
 

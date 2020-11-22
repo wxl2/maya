@@ -18,15 +18,26 @@ namespace net{
     {
     public:
         typedef std::function<void (const HttpRequest&,HttpResponse*)> HttpCallback;
+        typedef std::function<void ()> InitCallback;
         HttpServer(EventLoop* loop,const InetAddress& listenAddr,
                    const string& name,
                    TcpServer::Option option=TcpServer::kNoReusePort);
 
         EventLoop* getLoop()const{return server_.getLoop();}
         /// Not thread safe, callback be registered before calling start().//在调用start函数后调用
-        void setHttpCallback(const HttpCallback& cb)
+        void setGetCallback(const HttpCallback& cb)
         {
-            httpCallback_ = cb;
+            getCallback_ = cb;
+        }
+
+        void setPostCallback(const HttpCallback& cb)
+        {
+            postCallback_ = cb;
+        }
+
+        void setInitCallback(const InitCallback& cb)
+        {
+            initCallback_ = cb;
         }
 
         void setThreadNum(int numThreads)
@@ -42,9 +53,13 @@ namespace net{
         void onDisconnected(const  TcpConnectionPtr& conn);
         void onMessage(const TcpConnectionPtr& conn,Buffer* buf,Timestamp receviceTime);
         void onRequest(const TcpConnectionPtr& conn,const HttpRequest&);
+        void doPost(const HttpRequest& req, HttpResponse* resp);
+        void doGet(const HttpRequest& req, HttpResponse* resp);
 
         TcpServer server_;
-        HttpCallback httpCallback_;
+        HttpCallback getCallback_;
+        InitCallback initCallback_;
+        HttpCallback postCallback_;
         connMap connMaps_;
         std::mutex mutex_;
     };

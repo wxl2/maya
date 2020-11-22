@@ -25,3 +25,5 @@ TcpServer,TcpClient,TcpConnection,Connector所有类全部完成
 #2020-11-18
 使用maya完成了一个基于http的文件下载服务,目前仅支持GET方法
 
+#2020-11-22
+重构HttpServer使其和Servelt高度相似,添加post方法,但比较简陋

@@ -61,6 +61,7 @@ namespace net{
         MessageCallback  messageCallback_;
         WriteCompleteCallback writeCompleteCallback_;
         bool retry_;
+        //是否已经连接
         bool connect_;
         //用于标识已经建立过多少个连接
         int nextConnId_;

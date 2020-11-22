@@ -19,11 +19,12 @@ namespace net{
     public:
         explicit FileDown(const string url);
         ~FileDown();
-        void onRequest(const HttpRequest& req, HttpResponse* resp);
         int readDir(std::vector<std::string>& list,const string url);
         int judgePath(const string path);
         int readFile(string filename,int size,string& buf);
         void isDir(const string path,HttpResponse* resp);
+        void doPost(const HttpRequest& req, HttpResponse* resp);
+        void doGet(const HttpRequest& req, HttpResponse* resp);
         void isFile(const string filename,int size,HttpResponse* resp);
         void fileNoExist(const string filename,HttpResponse* resp);
         void serverError(int statusCode,HttpResponse *resp);

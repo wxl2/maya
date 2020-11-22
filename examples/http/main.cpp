@@ -31,7 +31,8 @@ int main(int argc, char* argv[])
     EventLoop loop;
     HttpServer server(&loop, InetAddress(8000), "dummy");
     FileDown fileserver("./");
-    server.setHttpCallback(std::bind(&FileDown::onRequest,&fileserver,_1,_2));
+    server.setGetCallback(std::bind(&FileDown::doGet,&fileserver,_1,_2));
+    server.setPostCallback(std::bind(&FileDown::doPost,&fileserver,_1,_2));
     server.setThreadNum(numThreads);
     server.start();
     loop.loop();
