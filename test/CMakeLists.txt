@@ -24,3 +24,12 @@ target_link_libraries(EventLoop_test base net)
 
 add_executable(Acceptor_test Acceptor_test.cpp)
 target_link_libraries(Acceptor_test  base net)
+
+add_executable(Base64Util_test Base64Util_test.cpp)
+target_link_libraries(Base64Util_test utlis)
+
+add_executable(URLEncodeUntil_test URLEncodeUntil_test.cpp)
+target_link_libraries(URLEncodeUntil_test utlis)
+
+add_executable(CharacterUtil_test CharacterUtil_test.cpp)
+target_link_libraries(CharacterUtil_test utlis)

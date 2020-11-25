@@ -9,6 +9,7 @@ add_subdirectory(base)
 add_subdirectory(net)
 add_subdirectory(test)
 add_subdirectory(examples)
+add_subdirectory(utils)
 
 
 add_executable(maya main.cpp)
