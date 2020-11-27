@@ -27,3 +27,6 @@ TcpServer,TcpClient,TcpConnection,Connector所有类全部完成
 
 #2020-11-22
 重构HttpServer使其和Servelt高度相似,添加post方法,但比较简陋
+
+#2020-11-25
+新建utils文件夹用于存放一些工具类文件,此次新建了URL,Base64编解码工具,UTF8和GB2312字符集之间相互转换,string操作工具,修改http,增加URL解码

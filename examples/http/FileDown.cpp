@@ -120,7 +120,7 @@ int FileDown::judgePath(const string path)
 
     if(S_ISDIR(buf.st_mode))
         return 0;
-    return buf.st_size;
+    return buf.st_size+1;
 }
 
 void FileDown::isDir(const string path, HttpResponse *resp)
@@ -156,6 +156,7 @@ void FileDown::isDir(const string path, HttpResponse *resp)
 void FileDown::isFile(const string filename,int size,HttpResponse *resp)
 {
     string contentType;
+    size-=1;
     size_t pos=filename.find_last_of('.');
     if(pos!=string::npos)
     {

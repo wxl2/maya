@@ -33,3 +33,15 @@ target_link_libraries(URLEncodeUntil_test utlis)
 
 add_executable(CharacterUtil_test CharacterUtil_test.cpp)
 target_link_libraries(CharacterUtil_test utlis)
+
+add_executable(StringUntil_test StringUntil_test.cpp)
+target_link_libraries(StringUntil_test utlis)
+
+add_executable(UUIDGenerator_test UUIDGenerator_test.cpp)
+target_link_libraries(UUIDGenerator_test utlis)
+
+add_executable(MD5_test MD5_test.cpp)
+target_link_libraries(MD5_test utlis)
+
+add_executable(DaemonRun_test DaemonRun_test.cpp)
+target_link_libraries(DaemonRun_test utlis)

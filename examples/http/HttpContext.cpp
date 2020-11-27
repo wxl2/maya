@@ -4,7 +4,7 @@
 
 #include "HttpContext.h"
 #include "net/Buffer.h"
-
+#include "utils/URLEncodeUtil.h"
 using namespace maya;
 using namespace maya::net;
 
@@ -24,12 +24,18 @@ bool HttpContext::processRequestLine(const char *begin, const char *end)
             const char* question=std::find(start,space,'?');
             if(space!=end)
             {
-                request_.setPath(start,question);
+                std::string src(start,question);
+                std::string dst;
+                detail::URLEncodeUtil::decode(src,dst);
+                request_.setPath(dst.c_str(),dst.c_str()+dst.size());
                 request_.setQuery(question,space);
             }
             else
             {
-                request_.setPath(start,space);
+                std::string src(start,question);
+                std::string dst;
+                detail::URLEncodeUtil::encode(src,dst);
+                request_.setPath(dst.c_str(),dst.c_str()+dst.size());
             }
 
             start=space+1;

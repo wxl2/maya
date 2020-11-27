@@ -55,7 +55,6 @@ bool URLEncodeUtil::decode(const std::string &src, std::string &dst)
     if(src.length()<0)
         return false;
     size_t size=src.size();
-    char buf[]="你好";
     for(size_t i=0;i<src.size();++i)
     {
         if(src[i]=='%')
