@@ -7,7 +7,7 @@
 #include <chrono>
 
 using namespace maya;
-using namespace std::chrono_literals;
+using namespace std::chrono_literals;//since C++14
 
 std::unique_ptr<std::thread> AsyncLogging::thread_;
 std::mutex AsyncLogging::mutex_;

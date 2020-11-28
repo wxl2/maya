@@ -47,7 +47,7 @@ int main()
     g_loop=&loop;
     int timefd=::timerfd_create(CLOCK_MONOTONIC,TFD_NONBLOCK|TFD_CLOEXEC);
     maya::net::Channel channel(&loop,timefd);
-    channel.setReadCallback(timeout);
+    channel.setReadCallback(std::bind(timeout));
     channel.enableReading();
 
     struct itimerspec howlong;

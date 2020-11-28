@@ -45,3 +45,9 @@ target_link_libraries(MD5_test utlis)
 
 add_executable(DaemonRun_test DaemonRun_test.cpp)
 target_link_libraries(DaemonRun_test utlis)
+
+add_executable(ProtocolStream_test ProtocolStream_test.cpp)
+target_link_libraries(ProtocolStream_test utlis)
+
+add_executable(json_test json_test.cpp)
+target_link_libraries(json_test json)
