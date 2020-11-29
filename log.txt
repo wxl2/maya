@@ -33,3 +33,6 @@ TcpServer,TcpClient,TcpConnection,Connector所有类全部完成
 
 #2020-11-28
 添加ProtocolStream协议类,以及添加json1.9.3库
+
+#2020-11-29
+添加mysql操作相关封装,在utils库中添加配置文件读取类,添加zlib库

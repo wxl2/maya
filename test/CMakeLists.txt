@@ -54,3 +54,6 @@ target_link_libraries(json_test json)
 
 add_executable(mysqlapi_test mysqlapi_test.cpp)
 target_link_libraries(mysqlapi_test mysqlapi)
+
+add_executable(ConfigFileReadr_test ConfigFileReadr_test.cpp)
+target_link_libraries(ConfigFileReadr_test utlis)

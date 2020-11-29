@@ -6,7 +6,8 @@ set(utils_SRSC
         UUIDGenerator.cpp
         MD5.cpp
         DaemonRun.cpp
-        ProtocolStream.cpp)
+        ProtocolStream.cpp
+        ConfigFileReader.cpp)
 
 add_library(utlis ${utils_SRSC})
 target_link_libraries(utlis uuid)

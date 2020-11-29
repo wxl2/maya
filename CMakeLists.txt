@@ -15,6 +15,7 @@ add_subdirectory(json)
 add_subdirectory(utils)
 add_subdirectory(mysqlapi)
 add_subdirectory(mysqlmgr)
+add_subdirectory(zlib)
 
 
 add_executable(maya main.cpp)
