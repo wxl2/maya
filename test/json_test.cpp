@@ -5,6 +5,7 @@
 #include "json/json.h"
 #include <stdio.h>
 #include <string>
+#include "mysqlapi/Field.h"
 
 /**
  * {
@@ -32,7 +33,7 @@ string ConstructJsonString()
     rootValue["indent"]["length"] = 3;
     rootValue["indent"]["use_space"] = true;
 
-    return Json::FastWriter().write(rootValue);
+    return Json::FastWriter().write(rootValue);//FastWriter已被弃用这里会报warning
 }
 void ParseJsonString(const string& document)
 {
@@ -78,8 +79,11 @@ void ParseJsonString(const string& document)
 int main()
 {
     string document = ConstructJsonString();
-    printf(document.c_str());
+    printf("%s\n",document.c_str());
     printf("\n");
     ParseJsonString(document);
+    std::string s="ABCDE";
+    toLowerString(s);
+    printf("%s\n",s.c_str());
     return 0;
 }

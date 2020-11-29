@@ -51,3 +51,6 @@ target_link_libraries(ProtocolStream_test utlis)
 
 add_executable(json_test json_test.cpp)
 target_link_libraries(json_test json)
+
+add_executable(mysqlapi_test mysqlapi_test.cpp)
+target_link_libraries(mysqlapi_test mysqlapi)
