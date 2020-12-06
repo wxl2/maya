@@ -16,14 +16,16 @@ namespace net{
     class FileManager final :nocopyable
     {
     public:
+        typedef std::list<std::string> FileList;
         FileManager();
         ~FileManager();
 
         bool init(const char* basepath);
         bool isFileExist(const char* filename);
         void addFile(const char* filename);
+        const FileList& getFileList() const;
     private:
-        std::list<std::pair<std::string,std::string>>   m_listFiles;
+        FileList                                        m_listFiles;
         std::mutex                                      m_mtFile;
         std::string                                     m_basePath;
     };

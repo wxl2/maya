@@ -29,7 +29,7 @@ void StringUtil::trimRigtht(std::string &str, char trimmed)
     {
         if(tmp[i]!=trimmed)
         {
-            str=tmp.substr(0,i);
+            str=tmp.substr(0,i+1);
             break;
         }
     }

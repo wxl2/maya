@@ -26,15 +26,15 @@ namespace net{
         }
         /*!
          *
-         * @param cmd 标识文件为上传还是下载
+         * @param cmd 标识文件为上传还是下载或者获取文件列表
          * @param seq 数据包序列号
          * @param errorcode 错误码
-         * @param filemd5 文件的md5值
+         * @param filename 文件名
          * @param offset 文件传输的偏远量
          * @param filesize 文件大小
          * @param filedata 文件内容
          */
-        void send(int32_t cmd,int32_t seq,int32_t errorcode,const std::string& filemd5,int64_t offset,int64_t filesize, const std::string& filedata);
+        void send(int32_t cmd,int32_t seq,int32_t errorcode,const std::string& filename,int64_t offset,int64_t filesize, const std::string& filedata);
 
     private:
         /*!

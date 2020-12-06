@@ -36,3 +36,9 @@ TcpServer,TcpClient,TcpConnection,Connector所有类全部完成
 
 #2020-11-29
 添加mysql操作相关封装,在utils库中添加配置文件读取类,添加zlib库
+
+#2020-11-30
+添加一个ftp目录,这个ftp的功能仅是文件上传和下载与ftp协议所规定的ftp软件不同
+
+#2020-12-06
+完成ftp软件

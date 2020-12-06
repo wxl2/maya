@@ -59,4 +59,4 @@ add_executable(ConfigFileReadr_test ConfigFileReadr_test.cpp)
 target_link_libraries(ConfigFileReadr_test utlis)
 
 add_executable(fileserver_test fileserver_test.cpp)
-target_link_libraries(fileserver_test fileserver)
+target_link_libraries(fileserver_test ftpserver)

@@ -123,11 +123,11 @@ namespace net {
         const std::pair<std::thread::id,pid_t> threadId_;
         int wakeupFd_;//用于唤醒IO线程
         Timestamp pollReturnTime_;
-        std::unique_ptr<Channel> wakeupChannel_;//用于唤醒IO线程的channel,这个channel监听wakeupFd_是否有事件到来,有便会唤醒IO线程
         mutable std::mutex mutex_;
         //没有在IO线程的时候添加的要调用的函数,
         std::vector<Functor> pendingFunctors_;
         std::unique_ptr<Poller> poller_;
+        std::unique_ptr<Channel> wakeupChannel_;//Channel必须定义在Poller后否则析构时会出错,用于唤醒IO线程的channel,这个channel监听wakeupFd_是否有事件到来,有便会唤醒IO线程
         std::unique_ptr<TimerQueue> timerQueue_;
 
         ChannelList activeChanels_;

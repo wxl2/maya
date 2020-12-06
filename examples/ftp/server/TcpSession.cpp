@@ -7,17 +7,18 @@
 #include "utils/ProtocolStream.h"
 #include "base/Logging.h"
 
-maya::net::TcpSession::TcpSession(const std::weak_ptr<TcpConnection> &tmpConn)
+using namespace maya;
+using namespace maya::net;
+TcpSession::TcpSession(const std::weak_ptr<TcpConnection> &tmpConn)
 :tmpConn_(tmpConn)
 {
 }
 
-maya::net::TcpSession::~TcpSession()
+TcpSession::~TcpSession()
 {
 }
 
-void
-maya::net::TcpSession::send(int32_t cmd, int32_t seq, int32_t errorcode, const std::string &filemd5, int64_t offset,
+void TcpSession::send(int32_t cmd, int32_t seq, int32_t errorcode, const std::string &filename, int64_t offset,
                             int64_t filesize, const std::string &filedata)
 {
     std::string outbuf;
@@ -25,7 +26,7 @@ maya::net::TcpSession::send(int32_t cmd, int32_t seq, int32_t errorcode, const s
     writerStream.WriteInt32(cmd);
     writerStream.WriteInt32(seq);
     writerStream.WriteInt32(errorcode);
-    writerStream.WriteString(filemd5);
+    writerStream.WriteString(filename);
     writerStream.WriteInt64(offset);
     writerStream.WriteInt64(filesize);
     writerStream.WriteString(filedata);
@@ -34,7 +35,7 @@ maya::net::TcpSession::send(int32_t cmd, int32_t seq, int32_t errorcode, const s
     sendPackage(outbuf.c_str(),outbuf.length());
 }
 
-void maya::net::TcpSession::sendPackage(const char *body, int64_t bodylength)
+void TcpSession::sendPackage(const char *body, int64_t bodylength)
 {
     string strPackageData;
     file_msg_header header = { (int64_t)bodylength };

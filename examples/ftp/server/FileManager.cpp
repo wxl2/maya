@@ -39,7 +39,7 @@ bool FileManager::init(const char *basepath)
     {
         if((strcmp(dirp->d_name,".")==0)||(strcmp(dirp->d_name,"..")==0))
             continue;
-        m_listFiles.emplace_back(std::make_pair(dirp->d_name,""));
+        m_listFiles.emplace_back(dirp->d_name);
         LOG_INFO<<"filename: "<<dirp->d_name;
     }
 
@@ -54,7 +54,7 @@ bool FileManager::isFileExist(const char *filename)
     //先查看缓存
     for(const auto& iter:m_listFiles)
     {
-        if(iter.first==filename)
+        if(iter==filename)
             return true;
     }
 
@@ -65,7 +65,7 @@ bool FileManager::isFileExist(const char *filename)
     if(fp!=NULL)
     {
         fclose(fp);
-        m_listFiles.emplace_back(std::make_pair(filename,""));
+        m_listFiles.emplace_back(filename);
         return true;
     }
     return false;
@@ -74,5 +74,10 @@ bool FileManager::isFileExist(const char *filename)
 void FileManager::addFile(const char *filename)
 {
     std::lock_guard<std::mutex> lock(m_mtFile);
-    m_listFiles.emplace_back(std::make_pair(filename,""));
+    m_listFiles.emplace_back(filename);
+}
+
+const FileManager::FileList &FileManager::getFileList() const
+{
+    return m_listFiles;
 }
